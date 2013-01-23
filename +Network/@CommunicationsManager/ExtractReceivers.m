@@ -2,35 +2,31 @@
 %
 % it has selfloops iff aaiAjacencyMatrix admits selfloops
 %
-function aiReceivers = ExtractReceivers( tCommunicationsManager, tSender, fCurrentTime )
+function aiReceivers = ExtractReceivers( tCommunicationsManager, iSender )
 	%
 	%
 	% get the neighbors (but not the self-loop link)
-	aiNeighborsOfSender = tCommunicationsManager.tGraph.GetNeighborsOfNode( tSender.iLabel, false );
+	aiNeighborsOfSender = tCommunicationsManager.tGraph.GetNeighborsOfNode( iSender, false );
 	%
 	%
-	% select the list of receivers
-	switch( tSender.iConsensusKind )
+	% select the receivers
+	if( tCommunicationsManager.bUseBroadcastCommunications )
 		%
-		case {tSender.MAX_CONSENSUS, tSender.AVERAGE_BY_RATIOS_CONSENSUS}
-			%
-			aiReceivers = aiNeighborsOfSender;
+		% in this case, transmit to everybody
+		aiReceivers = aiNeighborsOfSender;
 		%
-		case {tSender.AVERAGE_CONSENSUS, tSender.ACCELERATED_AVERAGE_CONSENSUS}
-			%
-			aiReceivers = aiNeighborsOfSender( randi( numel(aiNeighborsOfSender) ) );
+	else%
 		%
-		otherwise
-			%
-			error('wrong consensus kind!');
+		% in this other case, transmit just to one
+		aiReceivers = aiNeighborsOfSender( randi( numel(aiNeighborsOfSender) ) );
 		%
-	end;% switch on consensus kind
+	end;%
 	%
 	%
 	% update the links extractions counters
 	for iReceiverIndex = 1:numel(aiReceivers);
 		%
-		tCommunicationsManager.UpdateLinkActivationsCounter( tSender.iLabel, aiReceivers(iReceiverIndex), fCurrentTime );
+		tCommunicationsManager.UpdateLinkActivationsCounter( iSender, aiReceivers(iReceiverIndex) );
 		%
 	end;%
 	%

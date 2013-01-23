@@ -2,16 +2,14 @@
 %
 % criterion: 
 % IF
-%     consensus has been reached
+%     blablabla
 % THEN
 %     you should not communicate anymore
 %
-function bShouldCommunicate = ShouldCommunicate( tCommunicationsManager, tResults, atNodes )
+function bShouldCommunicate = ShouldCommunicate( tCommunicationsManager )
 	%
 	%
-% 	if(		tResults.HasConsensusBeenReached( atNodes )	...
-% 		||	tCommunicationsManager.iCurrentTime > 1000 				)
- 	if(	tResults.HasConsensusBeenReached( atNodes ) )
+ 	if(	tCommunicationsManager.iCurrentTime > 10 )
 		%
 		bShouldCommunicate = false;
 		%

@@ -2,10 +2,10 @@
 %
 % it has selfloops iff aaiAjacencyMatrix admits selfloops
 %
-function iNode = ExtractRandomNode( tCommunicationsManager, fCurrentTime )
+function iNode = ExtractRandomNode( tCommunicationsManager )
 	%
 	% check if some nodes must activate
-	aiNodesThatMustActivateNow = tCommunicationsManager.GetNodesViolatingPersistentActivation( fCurrentTime );
+	aiNodesThatMustActivateNow = tCommunicationsManager.GetNodesViolatingPersistentActivation();
 	%
 	% if no nodes must commnicate then extract randomly, otherwise extract
 	% randomly among the ones that must activate now
@@ -27,6 +27,6 @@ function iNode = ExtractRandomNode( tCommunicationsManager, fCurrentTime )
 	iNode		= aiNodesThatCanActivate( iNodeIndex );
 	%
 	% update the counters
-	tCommunicationsManager.UpdateNodeActivationsCounter( iNode, fCurrentTime );
+	tCommunicationsManager.UpdateNodeActivationsCounter( iNode );
 	%
 end %

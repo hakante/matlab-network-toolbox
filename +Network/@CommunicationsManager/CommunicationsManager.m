@@ -8,7 +8,9 @@ classdef CommunicationsManager < handle
 		bPrintDebugInformation;
 		%
 		tGraph;
-		strCommunicationKind;			% 'directed' | 'undirected'
+		%
+		bUseDirectedCommunications;		% true = directed,  false = undirected
+		bUseBroadcastCommunications;	% true = broadcast, false = gossip
 		%
 		iCurrentTime;
 		%
@@ -44,7 +46,8 @@ classdef CommunicationsManager < handle
 		function tCommunicationsManager = CommunicationsManager( tParameters )
 			%
 			tCommunicationsManager.bPrintDebugInformation			= tParameters.bPrintDebugInformation;
-			tCommunicationsManager.strCommunicationKind				= tParameters.strCommunicationKind;
+			tCommunicationsManager.bUseDirectedCommunications		= tParameters.bUseDirectedCommunications;
+			tCommunicationsManager.bUseBroadcastCommunications		= tParameters.bUseBroadcastCommunications;
 			tCommunicationsManager.tGraph							= Network.Graph( tParameters );
 			tCommunicationsManager.iCurrentTime						= 0;
 			%
