@@ -13,17 +13,12 @@ tCommunicationsManager = Network.CommunicationsManager( tParameters );
 % allocate the consensus nodes
 for iNode = 1:tParameters.iNumberOfNodes;
 	%
-	iNumberOfNeighbors = numel( tCommunicationsManager.tGraph.GetNeighborsOfNode( iNode, true ) );
-	%
 	atConsensusNodes(iNode) =				...
 		Network.ConsensusNode(	iNode,		...
 								1,			...
 								12,			...
 								'gaussian',	...
 								'accelerated gossip', 0.5, 0.1 ); %#ok<SAGROW>
-	%
-	% DEBUG
-% 	atConsensusNodes(iNode).Print( false );
 	%
 end;%
 
