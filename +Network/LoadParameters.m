@@ -1,8 +1,8 @@
 % ----------------------------------------------------------------------- %
 % GRAPH
-tParameters.iNumberOfNodes					= 20;
-tParameters.iMaximalNumberOfNodes			= 40;
-tParameters.strKindOfGraph					= 'random geometric'; % 'line' | 'cycle' | 'random geometric' | 'bidimensional grid'
+tParameters.iNumberOfNodes					= 10;
+tParameters.iMaximalNumberOfNodes			= 20;
+tParameters.strKindOfGraph					= 'cycle'; % 'line' | 'cycle' | 'random geometric' | 'bidimensional grid'
 %
 tParameters.fCommunicationRadius			= 0.5; % for random geometric graphs
 tParameters.aiBidimensionalGridDimensions	= [4, 5];
