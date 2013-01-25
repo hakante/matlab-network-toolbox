@@ -1,38 +1,27 @@
-% Algorithm: raise the adjacency matrix up to the moment where it has no
-% zero elements
+% The eccentricity  of a vertex  is the greatest geodesic distance between
+% and any other vertex. It can be thought of as how far a node is from the
+% node most distant from it in the graph.
 %
-function ComputeDiameter( tGraph )
-	%
-	% initialization of the algorithm
-	bThereIsAZero					= true;
-	tGraph.iDiameter				= 0;
-	aaiRaisedAdjacencyMatrix		= eye( tGraph.iNumberOfNodes );
-	aaiSelfLoopedAdjacencyMatrix	= tGraph.GetSelfLoopedAdjacencyMatrix();
-	%
-	while( bThereIsAZero )
-		%
-		tGraph.iDiameter			= tGraph.iDiameter + 1;
-		aaiRaisedAdjacencyMatrix	= aaiRaisedAdjacencyMatrix * aaiSelfLoopedAdjacencyMatrix;
-		%
-% 		% DEBUG
-%  		fprintf('Diameter computation: trying d = %d\n', tGraph.iDiameter);
-		if( sum( aaiRaisedAdjacencyMatrix(:) == zeros(tGraph.iNumberOfNodes^2, 1) ) == 0 )
-			%
-			bThereIsAZero = false;
-			%
-		end;%
-		%
-		if( tGraph.iDiameter > tGraph.iNumberOfNodes )
-			%
-			tGraph.iDiameter = -1;
-			fprintf('WARNING: there is more than one connected components (warning from "ComputeDiameter()")\n');
-			return;
-			%
-		end;%
-		%
-	end;%
-	%
-	% DEBUG
-% 	fprintf('Diameter computation: true d = %d\n', iDiameter);
-	%
-end %
+% The diameter of a graph is the maximum eccentricity of any vertex in the
+% graph. That is, it is the greatest distance between any pair of vertices.
+% To find the diameter of a graph, first find the shortest path between
+% each pair of vertices. The greatest length of any of these paths is the
+% diameter of the graph.
+%
+% A peripheral vertex in a graph is one that achieves the diameter.
+
+function [diameter, peripheralVertices] = ComputeDiameter( g )
+
+    allPairsShortestPaths = g.AllPairsShortestPaths();
+    
+    nodeEccentricity = max(allPairsShortestPaths);
+    
+    diameter = max(nodeEccentricity);
+    
+    peripheralVertices = find(nodeEccentricity==diameter);
+    
+    if (diameter == Inf)
+       warning('The graph is not connected');
+    end
+    
+end

@@ -1,14 +1,5 @@
-function bIsConnected = IsConnected( tGraph )
-	%
-	aaiSelfloopLessAdjacencyMatrix =	...
-		tGraph.aaiAdjacencyMatrix - diag(diag(tGraph.aaiAdjacencyMatrix));
-	%
-	aiNodesDegrees = sum(aaiSelfloopLessAdjacencyMatrix);
-	%
-	aaiLaplacianMatrix = diag( aiNodesDegrees ) - aaiSelfloopLessAdjacencyMatrix;
-	%
-	afLaplaciansEigenvalues = sort(eig( aaiLaplacianMatrix ), 'ascend');
-	%
-	bIsConnected = ( (afLaplaciansEigenvalues(2)^2) > eps );
-	%
-end %
+function isConnected = IsConnected( g )
+
+    isConnected = (nnz(abs(eig(g.Laplacian()))>eps) == g.numberOfNodes-1);
+    
+end

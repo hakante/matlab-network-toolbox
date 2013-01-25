@@ -1,28 +1,20 @@
-function GenerateLineGraph( tGraph )
-	%
-	% initialization
-	aaiIdentity		= eye( tGraph.iNumberOfNodes );
-	aaiUpperPart	= zeros( size( aaiIdentity ) );
-	%
-	% find the upper part
-	aaiUpperPart( :, 2:tGraph.iNumberOfNodes )	= ...
-		aaiIdentity( :, 1:(tGraph.iNumberOfNodes-1)  );
-	%
-	% find the upper part
-	aaiLowerPart = aaiUpperPart';
-	%
-	% create the adjacency matrix without selfloops
-	tGraph.aaiAdjacencyMatrix = aaiLowerPart + aaiUpperPart;
-	%
-	% in case add the self loops
-	if( tGraph.bUseSelfLoops )
-		%
-		tGraph.aaiAdjacencyMatrix = tGraph.aaiAdjacencyMatrix + aaiIdentity;
-		%
-	end;%
-	%
-	% set the nodes coordinates
-	tGraph.aafNodesPositions			= zeros(tGraph.iNumberOfNodes, 2);
-	tGraph.aafNodesPositions(:, 1)	= linspace(0, 1, tGraph.iNumberOfNodes);
-	%
-end %
+function g = GenerateLineGraph( N, isDirected )
+
+    if nargin == 0 || ~isscalar(N) || N<1
+        error('Invalid graph size given');
+    end
+    if nargin < 2
+        isDirected = false;
+    end
+    
+    % Construct graph
+    g = Network.Graph();
+    g.name = 'Line Graph';
+    g.adjacencyMatrix = sparse(1:N-1, 2:N, true(N-1, 1), N,N);
+    g.isDirected = isDirected;
+    
+    % Setup line layout
+    g.xNodeCoordinates = 1:N;
+    g.yNodeCoordinates = zeros(1,N);
+    
+end

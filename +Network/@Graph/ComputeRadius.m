@@ -1,42 +1,24 @@
-% Algorithm: raise the adjacency matrix up to the moment where it has no
-% zero elements
+% The eccentricity  of a vertex  is the greatest geodesic distance between
+% and any other vertex. It can be thought of as how far a node is from the
+% node most distant from it in the graph.
 %
-function ComputeRadius( tGraph )
-	%
-	% initialization of the algorithm
-	bEveryRowHasAZero				= true;
-	tGraph.iRadius				= 0;
-	aaiRaisedAdjacencyMatrix		= eye( tGraph.iNumberOfNodes );
-	aaiSelfLoopedAdjacencyMatrix	= tGraph.GetSelfLoopedAdjacencyMatrix();
-	%
-	while( bEveryRowHasAZero )
-		%
-		tGraph.iRadius			= tGraph.iRadius + 1;
-		aaiRaisedAdjacencyMatrix	= aaiRaisedAdjacencyMatrix * aaiSelfLoopedAdjacencyMatrix;
-		%
-% 		% DEBUG
-%  		fprintf('Radius computation: trying d = %d\n', tGraph.iRadius);
-		for iRow = 1:tGraph.iNumberOfNodes;
-			%
-			if( sum( aaiRaisedAdjacencyMatrix(iRow, :) == zeros(1, tGraph.iNumberOfNodes) ) == 0 )
-				%
-				bEveryRowHasAZero = false;
-				%
-			end;%
-			%
-		end;%
-		%
-		if( tGraph.iRadius > tGraph.iNumberOfNodes )
-			%
-			tGraph.iRadius = -1;
-			fprintf('WARNING: there is more than one connected components (warning from "ComputeRadius()")\n');
-			return;
-			%
-		end;%
-		%
-	end;%
-	%
-	% DEBUG
-% 	fprintf('Radius computation: true d = %d\n', tGraph.iRadius);
-	%
-end %
+% The radius of a graph is the minimum eccentricity of any vertex.
+%
+% A central vertex in a graph is one whose eccentricity achieves the
+% radius.
+
+function [radius, centralVertices] = ComputeRadius( g )
+
+    allPairsShortestPaths = g.AllPairsShortestPaths();
+    
+    nodeEccentricity = max(allPairsShortestPaths);
+    
+    if (max(nodeEccentricity) == Inf)
+       error('The graph is not connected');
+    end
+    
+    radius = min(nodeEccentricity);
+    
+    centralVertices = find(nodeEccentricity==radius);
+    
+end
