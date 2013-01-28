@@ -39,6 +39,7 @@ classdef Graph < hgsetget
         g = GenerateLineGraph( N, isDirected );
         g = Generate2DGridGraph(Nr, Nc, isCyclic);
         g = Generate3DGridGraph(N1, N2, N3, isCyclic);
+        g = GenerateDeBruijnGraph( N, M );
         g = GenerateRandomGeometricGraph( N, distance, ensureConnected );
         g = GenerateRandomErdosRenyiGraph( N, probability, isDirected );
         g = GenerateRandomBarabasiAlbertGraph( N, outDegree, isDirected );
