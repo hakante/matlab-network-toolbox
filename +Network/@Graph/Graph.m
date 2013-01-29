@@ -86,7 +86,11 @@ classdef Graph < hgsetget
         end
         
         function list = get.adjacencyList(g)
-            [row,col] = find(g.pAdjacencyMatrix);
+            if g.isDirected
+                [row,col] = find(g.pAdjacencyMatrix);
+            else
+                [row,col] = find(triu(g.pAdjacencyMatrix));
+            end
             list = [row,col];
         end
     end
