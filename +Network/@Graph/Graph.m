@@ -48,7 +48,6 @@ classdef Graph < hgsetget
     % Setter and Getter methods
     methods
         function g = set.isDirected(g,val)
-            disp('In set.isDirected');
             if ~isscalar(val)
                 error('Value is not a scalar');
             end
@@ -70,7 +69,6 @@ classdef Graph < hgsetget
             if ~ismatrix(val) || (N1 ~= N2)
                 error('Adjacency matrix must be a square matrix');
             end
-            disp('In set.adjacencyMatrix');
             g.pAdjacencyMatrix = logical(val);
             if ~g.isDirected
                 g.pAdjacencyMatrix = g.pAdjacencyMatrix | g.pAdjacencyMatrix';
