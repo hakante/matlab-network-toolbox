@@ -6,8 +6,8 @@ classdef ConsensusNode
 		%
 		afConsensusVector;
 		afAuxiliaryConsensusVectorA;	% accelerated consensus = memory of the past consensus step
-		% -----------------------------	% hadjacostis consensus = initialized to the consensus vector
-		afAuxiliaryConsensusVectorB;	% hadjacostis consensus = initialized to ones, useful to find the eigenvector associated to the 2 largest eigenvalue of the laplacian matrix
+		% -----------------------------	% hadjicostis consensus = initialized to the consensus vector
+		afAuxiliaryConsensusVectorB;	% hadjicostis consensus = initialized to ones, useful to find the eigenvector associated to the 2 largest eigenvalue of the laplacian matrix
 		%
 		iNumberOfElements;
 		iNumberOfBits;				% for quantization purposes
@@ -21,7 +21,7 @@ classdef ConsensusNode
 		% consensus kinds
 		GOSSIP;
 		ACCELERATED_GOSSIP;
-		HADJACOSTIS;
+		HADJICOSTIS;
 		MAX;
 		%
 		% local generation kinds
@@ -41,7 +41,7 @@ classdef ConsensusNode
 										iNumberOfElements,		...
 										iNumberOfBits,			...
 										strLocalGenerationKind,	... 'deterministic' | 'gaussian' | 'uniform' | 'bernoulli multi-bits' | 'bernoulli single-bits'
-										strConsensusKind,		... 'gossip' | 'accelerated gossip' | 'hadjacostis' | 'max'
+										strConsensusKind,		... 'gossip' | 'accelerated gossip' | 'hadjicostis' | 'max'
 										varargin				)
 										%
 										% 'gossip':

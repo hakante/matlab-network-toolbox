@@ -46,7 +46,7 @@ function tNode = InitializeConsensusVector( tNode, iNumberOfElements, varargin )
 			%
 			tNode.afAuxiliaryConsensusVectorA = zeros( iNumberOfElements, 1 ) * 2^tNode.iNumberOfBits;
 		%
-		case tNode.HADJACOSTIS
+		case tNode.HADJICOSTIS
 			%
 			tNode.afAuxiliaryConsensusVectorA = tNode.afConsensusVector;
 			tNode.afAuxiliaryConsensusVectorB = ones( iNumberOfElements, 1 ) * 2^tNode.iNumberOfBits;

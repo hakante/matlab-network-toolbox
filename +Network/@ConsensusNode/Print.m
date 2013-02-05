@@ -12,18 +12,12 @@ function Print( tNode, bBeVerbose )
 			%
 		end;%
 		%
+		fprintf('\n\tcurrent estimate: %.3f\n', tNode.fCurrentEstimate);
+		%
 	else%
 		%
-		fprintf('n%d:\t', tNode.iLabel );
-		%
-		for iElement = 1:tNode.iNumberOfElements;
-			%
-			fprintf('%.2f\t', tNode.afConsensusVector(iElement) );
-			%
-		end;%
+		fprintf('n%d:\t%.3f\n', tNode.iLabel, tNode.fCurrentEstimate );
 		%
 	end;%
-	%
-	fprintf('\n');
 	%
 end %

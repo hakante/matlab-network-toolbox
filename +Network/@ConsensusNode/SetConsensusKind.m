@@ -17,9 +17,9 @@ function tNode = SetConsensusKind(	tNode,				...
 			tNode.fGossipWeight				= afVarargin(1);
 			tNode.fAcceleratedGossipWeight	= afVarargin(2);
 		%
-		case 'hadjacostis'
+		case 'hadjicostis'
 			%
-			tNode.iConsensusKind			= tNode.HADJACOSTIS;
+			tNode.iConsensusKind			= tNode.HADJICOSTIS;
 		%
 		case 'max'
 			%

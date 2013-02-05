@@ -10,9 +10,9 @@ function atNodes = DoConsensusStep( tSender, atNodes, aiReceivers )
 			%
 			atNodes = tSender.DoAcceleratedGossipConsensusStep( atNodes, aiReceivers );
 		%
-		case tSender.HADJACOSTIS;
+		case tSender.HADJICOSTIS;
 			%
-			atNodes = tSender.DoHadjacostisConsensusStep( atNodes, aiReceivers );
+			atNodes = tSender.DoHadjicostisConsensusStep( atNodes, aiReceivers );
 		%
 		case tSender.MAX;
 			%

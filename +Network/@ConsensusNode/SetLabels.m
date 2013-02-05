@@ -4,7 +4,7 @@ function tNode = SetLabels( tNode, iLabel )
 	%
 	tNode.GOSSIP				= 1;
 	tNode.ACCELERATED_GOSSIP	= 2;
-	tNode.HADJACOSTIS			= 3;
+	tNode.HADJICOSTIS			= 3;
 	tNode.MAX					= 4;
 	%
 	tNode.DETERMINISTIC			= 11;
