@@ -19,7 +19,7 @@ function ExportToGraphviz(g, filename, generatePDF)
     for edge = g.adjacencyList'
         if g.isDirected
             fprintf(file, '\t%d -> %d;\n', edge(1), edge(2));
-        elseif edge(1) <= edge(2)
+        else
             fprintf(file, '\t%d -- %d;\n', edge(1), edge(2));
         end
     end

@@ -1,4 +1,4 @@
-function pathLengths = ShortestPaths( g, startNode )
+function pathLengths = ShortestPaths( g, startNode, endNode )
 
     pathLengths = inf( g.numberOfNodes, 1 );
     pathLengths(startNode) = 0;
@@ -9,6 +9,9 @@ function pathLengths = ShortestPaths( g, startNode )
             if pathLengths(edge(1))+1 < pathLengths(edge(2))
                 pathLengths(edge(2)) = pathLengths(edge(1))+1;
             end
+            if ~g.isDirected && pathLengths(edge(2))+1 < pathLengths(edge(1))
+                pathLengths(edge(1)) = pathLengths(edge(2))+1;
+            end
         end
     end
     
@@ -16,8 +19,12 @@ function pathLengths = ShortestPaths( g, startNode )
         % TODO: Replace 1 with edge weight
         if pathLengths(edge(1))+1 < pathLengths(edge(2))
             warning('Graph contains negative cycles');
-            return;
+            break;
         end
+    end
+    
+    if nargin == 3
+        pathLengths = pathLengths(endNode);
     end
     
 end

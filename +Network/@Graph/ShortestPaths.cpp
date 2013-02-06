@@ -5,9 +5,9 @@
 
 void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray *prhs[]) {
 	/* Check for proper number of arguments. */
-	if (nrhs != 2) {
+	if (nrhs != 2 && nrhs != 3) {
 		mexErrMsgIdAndTxt( "MATLAB:Graph:ShortestPaths:invalidNumInputs",
-			"Two inputs required.");
+			"Two or three inputs required.");
 	} else if (nlhs > 1) {
 		mexErrMsgIdAndTxt( "MATLAB:Graph:ShortestPaths:invalidNumOutputs",
 			"At most one output is allowed.");
@@ -36,7 +36,10 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 	if (startNode < 0 || startNode >= numberOfNodes) {
 		mexErrMsgIdAndTxt( "MATLAB:Graph:ShortestPaths:invalidStartNode", "Start node is not in valid range.");
 	}
-
+    const int endNode = nrhs==3 ? mxGetScalar(prhs[2])-1 : -1;
+    if (endNode < -1 || endNode >= numberOfNodes) {
+		mexErrMsgIdAndTxt( "MATLAB:Graph:ShortestPaths:invalidEndNode", "End node is not in valid range.");
+	}
 
 	// Create output
 	plhs[0] = mxCreateDoubleMatrix(numberOfNodes, 1, mxREAL);
@@ -83,4 +86,11 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 			}
 		}
 	}
+    
+    // If end node given
+    if (endNode != -1) {
+        double distance = pathLengths[endNode];
+        mxDestroyArray(plhs[0]);
+        plhs[0] = mxCreateDoubleScalar(distance);
+    }
 }

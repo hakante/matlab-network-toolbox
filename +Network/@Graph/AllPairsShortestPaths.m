@@ -2,10 +2,9 @@ function pathLengths = AllPairsShortestPaths( g )
 
     % Initialization
     pathLengths = inf( g.numberOfNodes );
-    pathLengths(1:g.numberOfNodes+1:g.numberOfNodes*g.numberOfNodes) = 0;
-    
     % TODO: Enable optional weights, currently # hops
     pathLengths(g.adjacencyMatrix) = 1;
+    pathLengths(1:g.numberOfNodes+1:g.numberOfNodes*g.numberOfNodes) = 0;
     
     % Floyd-Warshall algorithm, |N|^3
     for k = 1:g.numberOfNodes
