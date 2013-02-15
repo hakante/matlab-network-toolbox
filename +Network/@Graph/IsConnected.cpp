@@ -101,7 +101,7 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 
 		while(!nodeQueue.empty() && nReachable < numberOfNodes) {
 			const int i = nodeQueue.front(); nodeQueue.pop();
-			for (int j=i+1; j<numberOfNodes; ++j) {
+			for (int j=0; j<numberOfNodes; ++j) {
 				if(adjacencyMatrix[i*numberOfNodes+j] && !reachable[j]) {
 					reachable[j] = true;
 					nReachable++;
@@ -119,7 +119,7 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 			nodeQueue.push(0);
 			while(!nodeQueue.empty() && nReachable2 < numberOfNodes) {
 				const int i = nodeQueue.front(); nodeQueue.pop();
-				for (int j=i+1; j<numberOfNodes; ++j) {
+				for (int j=0; j<numberOfNodes; ++j) {
 					if(adjacencyMatrix[j*numberOfNodes+i] && !reachable[j]) {
 						reachable[j] = true;
 						nReachable2++;
