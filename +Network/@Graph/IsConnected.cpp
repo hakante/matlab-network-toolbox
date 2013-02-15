@@ -40,9 +40,9 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 	if (mxIsSparse(pAdjacencyMatrix)) {
 		// Sparse adjacency matrix
 		std::vector<std::vector<mwIndex> > graph(numberOfNodes), rgraph(numberOfNodes);
-		const size_t nz = mxGetNzmax(pAdjacencyMatrix);
 		const mwIndex* row = mxGetIr(pAdjacencyMatrix);
 		const mwIndex* col = mxGetJc(pAdjacencyMatrix);
+		const size_t nz = col[mxGetN(pAdjacencyMatrix)];
 		mwIndex c = 0;
 		for(size_t i = 0; i<nz; ++i) {
 			while(col[c+1]<=i) ++c;

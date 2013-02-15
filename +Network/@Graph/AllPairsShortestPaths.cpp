@@ -37,9 +37,9 @@ void mexFunction( const int nlhs, mxArray *plhs[], const int nrhs, const mxArray
 			for (size_t c = 0; c<numberOfNodes; ++c)
 				pathLengths[r*numberOfNodes+c] = (r==c ? 0 : mxGetInf());
 
-		const size_t nz = mxGetNzmax(pAdjacencyMatrix);
 		const mwIndex* row = mxGetIr(pAdjacencyMatrix);
 		const mwIndex* col = mxGetJc(pAdjacencyMatrix);
+		const size_t nz = col[mxGetN(pAdjacencyMatrix)];
 		mwIndex c = 0;
 		for (size_t i = 0; i < nz; ++i) {
 			while (col[c+1] <= i) ++c;
