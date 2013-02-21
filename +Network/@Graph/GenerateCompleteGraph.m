@@ -11,9 +11,9 @@ function g = GenerateCompleteGraph( N )
     g.adjacencyMatrix = triu(true(N,N),1);
     
     % Setup cirular layout
-    cirularAngles = linspace(0, 2*pi, N+1);
-    g.xNodeCoordinates = sin(cirularAngles(1:end-1));
-    g.yNodeCoordinates = cos(cirularAngles(1:end-1));
+    circularAngles = linspace(0, 2*pi, N+1);
+    g.xNodeCoordinates = sin(circularAngles(1:end-1));
+    g.yNodeCoordinates = cos(circularAngles(1:end-1));
     
 end
 
